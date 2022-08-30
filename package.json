@@ -4,16 +4,19 @@
   "description": "My all social media web application",
   "main": "index.js",
   "scripts": {
-
-    "start":"nodemon index.js",
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "social"
   ],
-  "author": "urmi mahapatra",
+  "author": "CodingNinjas",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.1"
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-ejs-layouts": "^2.5.1",
+    "git": "^0.1.5",
+    "nodemon": "^2.0.19"
   }
 }
