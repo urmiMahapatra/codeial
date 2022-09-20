@@ -7,8 +7,8 @@ const db = require('./config/mongoose');
 const session  = require ('express-session');
 const passport = require ('passport');
 const passportLocal= require('./config/passport-local-strategy');
-const MongoStore = require('connect-mongo')(session);
-const sassMiddleware =require('node-sass-middleware');
+const MongoStore = require ('connect-mongo');
+const sassMiddleware = require('node-sass-middleware');
 
 app.use(sassMiddleware({
     src: './assets/scss',
@@ -31,8 +31,7 @@ app .set('layout extractScripts',true);
 
 
 
-// use express router
-app.use('/', require('./routes'));
+
 
 // set up the view engine
 app.set('view engine', 'ejs');
@@ -43,23 +42,16 @@ app.set('views', './views');
 // mongo store is used to store the session cookie in the db
 app.use(session({
     name: 'codeial',
-    // TODO change the secret before deployment in production mode
-    secret: 'blahsomething',
+    //TODO change the secret before deployement in production mode
+    secret: 'env.session_cookie_key',
     saveUninitialized: false,
     resave: false,
     cookie: {
         maxAge: (1000 * 60 * 100)
     },
-    store: new MongoStore(
-        {
-            mongooseConnection: db,
-            autoRemove: 'disabled'
-        
-        },
-        function(err){
-            console.log(err ||  'connect-mongodb setup ok');
-        }
-    )
+    store: MongoStore.create({ mongoUrl: 'mongodb://localhost/codeial_development' }),function(err){
+        console.log(err || 'connect mongodb setup ok');
+    }
 }));
 
 app.use(passport.initialize());

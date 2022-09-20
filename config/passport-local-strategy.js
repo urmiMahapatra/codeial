@@ -11,18 +11,19 @@ const User = require('../models/user');
 passport.use(new localStrategy({
     usernameField: 'email'
 },
-
 function (email,password,done){
-    // find a user and establised the identity
-
-    UserInfo.findOne({email: email}, function (err,user){
+    // find a user and establised the 
+    console.log('Urmi Here :' + password);
+    User.findOne({email: email}, function (err,user){
         if (err){
             console.log('Error in finding user --> passport');
-            return done(err);
-        
+            return done(err);        
         }
 
-        if(!user || user.password != assword){
+        if(!user || user.password != password){
+            if(!user) {
+                console.log('Invalid User NULL ');
+            }
             console.log('Invalid Username/password');
             return done(null,false);
             
