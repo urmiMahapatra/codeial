@@ -48,9 +48,11 @@ module.exports.signIn = function(req,res){
 // get the sign up data
 
 module.exports.create = function(req,res){
-   if (req.body.password != req.body.cofirm_password){
+    console.log(req.body)
+   if (req.body.password != req.body.confirm_password){
     return res.redirect ('back');
    }
+   console.log(req.body);
    User.findOne({email : req.body.email}, function (err,user){
     if (err){console.log ('error in finding user in signing up');return}
 
@@ -71,10 +73,13 @@ module.exports.create = function(req,res){
 
 //sign and create the seesion for the user
 module.exports.createSession = function(req, res){
+
+    req.flash('success','logged in successfully ');
     return res.redirect('/');
 }
 module.exports.destroySession = function(req, res){
     req.logout();
+    req.flash('success','you have logged out');
 
     return res.redirect('/');
 }
