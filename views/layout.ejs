@@ -1,5 +1,9 @@
-<html>
-    <head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>
             <%= title  %>
         </title>
@@ -30,7 +34,7 @@
         <%- script %>
         
         <script>
-               <% if(flash.success && falsh.sucess.length > 0){%>
+               <% if(flash.success && flash.success.length > 0){ %>
             new Noty({
              theme :'relax',
              text: '<%= flash.success %>',
@@ -43,7 +47,7 @@
           
        <% }%>
 
-       <% if(flash.success && falsh.sucess.length > 0){%>
+       <% if(flash.error && flash.error.length > 0){%>
             new Noty({
              theme :'relax',
              text: '<%= flash.error %>',
@@ -55,7 +59,7 @@
             }).show(); 
           
   
-            <% }%>
+            <% } %>
 
         </script>
     </body>
