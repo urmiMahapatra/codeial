@@ -15,6 +15,7 @@ module.exports.home =  async function(req, res){
     try{
         // populate of user of each user
   let posts =  await Post.find({})
+  .sort('-createdAt')
   .populate('user')
   .populate({
       path:'comments',
@@ -29,7 +30,8 @@ module.exports.home =  async function(req, res){
   return res.render('home' ,{
    title: "Codial| Home",
     posts : posts,
-   all_users: users});
+   all_users: users
+});
 
   }catch(err){
         console.log('Error',err);
